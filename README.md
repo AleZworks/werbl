@@ -96,7 +96,6 @@ src/                               Local Vite/React workspace
 scripts/                           Packaging, smoke, and asset scripts
 brand/                             Werbl icons and store listing images
 docs/privacy-policy.md             Public privacy policy source
-docs/chrome-web-store-submission.md Store listing submission notes
 ```
 
 ## Security
