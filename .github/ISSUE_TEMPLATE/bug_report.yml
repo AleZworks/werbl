@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a reproducible Werbl bug.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a Werbl bug. Please include enough detail to reproduce it.
+  - type: input
+    id: version
+    attributes:
+      label: Werbl version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: chrome
+    attributes:
+      label: Chrome version
+      placeholder: "Chrome 126..."
+    validations:
+      required: true
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Workflow
+      options:
+        - Right-click conversion
+        - Popup batch conversion
+        - Dedicated extension window
+        - Packaging/development
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List exact steps and include a public test image URL if relevant.
+      placeholder: |
+        1. Open...
+        2. Right-click...
+        3. Choose...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Add screenshots, file types, source site, target format, or console errors.

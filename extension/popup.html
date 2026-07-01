@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Werbl</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p>Werbl</p>
+          <h1>Batch convert</h1>
+        </div>
+        <div class="header-actions">
+          <button
+            id="settingsButton"
+            type="button"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            aria-label="Open settings"
+            title="Open settings"
+          >
+            Settings
+          </button>
+          <button
+            id="openWindowButton"
+            type="button"
+            aria-label="Open dedicated converter window"
+            title="Open dedicated converter window"
+          >
+            Window
+          </button>
+        </div>
+      </header>
+
+      <label class="drop-zone" id="dropZone">
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*"
+          multiple
+          aria-describedby="dropZoneHelp"
+          aria-labelledby="dropZoneTitle"
+        />
+        <span id="dropZoneTitle">Choose or drop images</span>
+        <small id="dropZoneHelp">PNG, JPG, WebP, AVIF, GIF, BMP</small>
+      </label>
+
+      <section class="controls" aria-label="Batch export settings">
+        <label>
+          Format
+          <select id="formatSelect">
+            <option value="image/png">PNG</option>
+            <option value="image/jpeg">JPG</option>
+            <option value="image/webp">WebP</option>
+          </select>
+        </label>
+      </section>
+
+      <div class="actions">
+        <button id="convertButton" type="button" aria-label="Convert selected images to a ZIP" title="Convert selected images to a ZIP" disabled>
+          Convert
+        </button>
+        <button id="clearButton" type="button" aria-label="Clear selected images" title="Clear selected images" disabled>
+          Clear list
+        </button>
+        <button id="forgetButton" type="button" aria-label="Clear saved ZIP cache" title="Clear saved ZIP cache and last conversion summary" disabled>
+          Clear ZIP
+        </button>
+      </div>
+
+      <section
+        class="settings-panel"
+        id="settingsPanel"
+        role="dialog"
+        aria-describedby="settingsDescription"
+        aria-labelledby="settingsTitle"
+        aria-modal="true"
+        tabindex="-1"
+        hidden
+      >
+        <div class="settings-header">
+          <h2 id="settingsTitle">Settings</h2>
+          <button id="closeSettingsButton" type="button" aria-label="Close settings" title="Close settings">Close</button>
+        </div>
+        <div>
+          <p id="settingsDescription">These settings apply to batch conversion and right-click JPG/WebP saves.</p>
+        </div>
+        <label>
+          JPG/WebP quality <span id="qualityValue">100</span>
+          <input id="qualityInput" type="range" min="40" max="100" value="100" />
+          <small>Saved globally. PNG ignores quality.</small>
+        </label>
+        <div class="contact-actions" aria-label="Contact">
+          <a id="bugReportLink" href="#">
+            <strong>Experiencing a bug?</strong>
+            <span>Send what happened, steps to reproduce, browser version, source site, and target format.</span>
+          </a>
+        </div>
+      </section>
+
+      <p class="warning-line" id="warningLine" role="status" aria-live="polite" hidden></p>
+      <section class="error-panel" id="rightClickErrorPanel" role="alert" hidden>
+        <p id="rightClickErrorMessage"></p>
+        <button
+          id="dismissRightClickErrorButton"
+          type="button"
+          aria-label="Dismiss right-click conversion error"
+          title="Dismiss right-click conversion error"
+        >
+          Dismiss
+        </button>
+      </section>
+      <progress class="progress-bar" id="progressBar" max="100" value="0" aria-describedby="statusLine" hidden></progress>
+      <p class="status-line" id="statusLine" role="status" aria-live="polite"></p>
+      <p class="summary-line" id="summaryLine" role="status" aria-live="polite" hidden></p>
+      <dl class="metrics" id="metricsPanel" hidden>
+        <div>
+          <dt>Time</dt>
+          <dd id="elapsedMetric">0.0s</dd>
+        </div>
+        <div>
+          <dt>Images</dt>
+          <dd id="imageMetric">0</dd>
+        </div>
+        <div>
+          <dt>Pixels</dt>
+          <dd id="pixelMetric">0 MP</dd>
+        </div>
+        <div>
+          <dt>ZIP</dt>
+          <dd id="zipMetric">0 KB</dd>
+        </div>
+      </dl>
+
+      <section class="queue" id="queue" aria-label="Selected images">
+        <p class="empty">No images selected.</p>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
