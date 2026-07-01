@@ -76,7 +76,6 @@ workflow.
 ## Package The Extension
 
 ```powershell
-npm run assets:store
 npm run package:extension
 ```
 
@@ -93,8 +92,9 @@ The package script includes only runtime extension files.
 ```text
 extension/                         Chrome MV3 extension
 src/                               Local Vite/React workspace
-scripts/                           Packaging, smoke, and asset scripts
-brand/                             Werbl icons and store listing images
+scripts/                           Packaging and smoke-test scripts
+brand/store/werbl-screenshot-main-1280x800.png
+                                   Public README screenshot
 docs/privacy-policy.md             Public privacy policy source
 ```
 
