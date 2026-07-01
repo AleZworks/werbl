@@ -1,8 +1,9 @@
 # Contributing
 
-Thanks for your interest in Werbl.
+Werbl is intentionally narrow. It should stay focused on local image conversion,
+clear privacy behavior, and formats the browser can actually produce.
 
-Before submitting changes, run:
+Before opening a pull request, run:
 
 ```powershell
 npm install
@@ -10,8 +11,6 @@ npm run setup:smoke
 npm run check
 ```
 
-Keep changes focused. Werbl should stay local-first, privacy-first, and limited
-to real browser-supported output formats unless a real encoder is added.
-
-Do not add remote analytics, ad code, or server upload behavior without making
-that behavior explicit in the README and privacy policy.
+Please avoid adding analytics, ad code, remote upload behavior, or broad new
+permissions unless the change is clearly explained in the README and privacy
+policy.

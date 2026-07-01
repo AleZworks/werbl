@@ -1,31 +1,20 @@
 {
   "name": "werbl",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Chrome extension for local image conversion.",
+  "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "check": "npm run check:extension && npm run build && npm run lint && npm run smoke:extension",
+    "check": "npm run check:extension && npm run lint && npm run smoke:extension",
     "check:extension": "node --check extension/background.js && node --check extension/offscreen.js && node --check extension/popup.js",
-    "lint": "oxlint",
+    "lint": "oxlint extension scripts",
     "package:extension": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Package-Extension.ps1",
-    "preview": "vite preview",
     "setup:smoke": "playwright install chromium",
     "smoke:extension": "node scripts/Smoke-Extension.mjs"
   },
-  "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
-  },
   "devDependencies": {
-    "@types/node": "^24.13.2",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.2",
     "oxlint": "^1.69.0",
-    "playwright": "^1.61.1",
-    "typescript": "~6.0.2",
-    "vite": "^8.1.0"
+    "playwright": "^1.61.1"
   }
 }

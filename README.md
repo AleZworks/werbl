@@ -1,47 +1,69 @@
 # Werbl
 
-Werbl is a local-first Chrome extension for converting browser images and local
-image batches to PNG, JPG, or WebP.
+Werbl is a Chrome extension for a very specific annoyance: you have an image in
+the browser, or a batch of local images, and you need clean PNG, JPG, or WebP
+files without sending them through an upload site.
 
-The core promise is simple: **convert images in Chrome without uploading them to
-a Werbl-controlled server.**
+There is no Werbl server. Conversion happens in Chrome with the browser's own
+image APIs.
 
 ![Werbl batch conversion screenshot](brand/store/werbl-screenshot-main-1280x800.png)
 
-## Features
+## What It Does
 
-- Right-click browser images and save them as PNG, JPG, or WebP.
-- Batch local image files into one downloadable ZIP.
-- Convert with browser-native image APIs.
-- Save downloads to the user's default Chrome download directory.
-- Preserve a completed ZIP so a canceled save dialog can be retried without
-  reconverting the batch.
-- Use a dedicated extension window for longer batch work.
-- Show conversion progress, elapsed time, image count, processed megapixels, and
-  generated ZIP size.
-- Store JPG/WebP quality as a global setting used by both batch conversion and
-  right-click saves.
+- Adds right-click options for saving browser images as PNG, JPG, or WebP.
+- Converts batches of local image files into one ZIP.
+- Keeps downloads in Chrome's normal download flow.
+- Lets you retry saving a completed ZIP without converting the same batch again.
+- Offers a dedicated extension window for longer batches, since toolbar popups
+  close when focus changes.
+- Shows progress, elapsed time, image count, processed megapixels, and ZIP size.
 
-## Privacy And Trust
+## What It Does Not Do
 
-Werbl has no backend service. Image conversion happens locally in Chrome using
-browser APIs such as `createImageBitmap`, canvas, `toBlob`, and `toDataURL`.
+- It does not upload images to a Werbl server.
+- It does not use analytics.
+- It does not sell or share user data.
+- It does not claim every website can be converted. Some sites intentionally
+  block browser image access.
 
-Werbl does not upload images, selected files, generated ZIP files, image URLs,
-conversion settings, or conversion history to a Werbl-controlled server.
+## Permissions, In Plain English
 
-See [docs/privacy-policy.md](docs/privacy-policy.md) for the full privacy
-policy.
+Werbl asks for broad-looking permissions because browser image conversion is
+messy in practice. The extension only uses them after you choose a Werbl action.
 
-## Current Limits
+- `contextMenus`: adds the right-click conversion menu.
+- `downloads`: saves converted images and ZIP files.
+- `offscreen`: gives the Manifest V3 service worker a hidden page where Chrome's
+  canvas APIs can run.
+- `scripting`: tries a rendered-page fallback when a direct image read fails.
+  This runs only after you pick a Werbl right-click action, and it looks for the
+  clicked image on that tab.
+- `storage`: saves the JPG/WebP quality setting and short-lived conversion
+  status.
+- `<all_urls>`: lets the right-click workflow work across normal websites instead
+  of only a small allowlist.
 
-- Some sites block browser-based image reading or canvas conversion.
-- Protected, expiring, cross-origin, or script-generated image URLs may fail.
+For right-click conversion, Chrome may request the selected image URL with the
+same site access your browser already has. That request goes to the image's
+source site, not to a Werbl server.
+
+You can read the implementation in `extension/`. The privacy policy is in
+[docs/privacy-policy.md](docs/privacy-policy.md).
+
+## Known Limits
+
+- Some protected, expiring, cross-origin, or script-generated image URLs will
+  fail.
+- Images that taint browser canvas security cannot be converted by the rendered
+  fallback.
 - Closing the toolbar popup during an active batch cancels that batch. Use the
   `Window` button for longer work.
 - Output is intentionally limited to PNG, JPG, and WebP.
 
-## Install For Development
+## Review Or Run Locally
+
+Install dependencies:
 
 ```powershell
 npm install
@@ -55,31 +77,22 @@ Load the extension manually:
 3. Click **Load unpacked**.
 4. Select the `extension` folder in this repository.
 
-## Development
-
-Run the local web workspace:
-
-```powershell
-npm run dev
-```
-
-Run the full validation suite:
+Run the checks:
 
 ```powershell
 npm run check
 ```
 
-`npm run check` validates extension JavaScript syntax, builds the Vite app, runs
-linting, and executes a Chromium smoke test for the extension popup and ZIP
-workflow.
+That command checks the extension JavaScript, runs linting, and launches a
+Chromium smoke test for the popup and ZIP workflow.
 
-## Package The Extension
+Package the extension:
 
 ```powershell
 npm run package:extension
 ```
 
-The Chrome Web Store upload ZIP is written to:
+The ZIP is written to:
 
 ```text
 artifacts\werbl-extension.zip
@@ -91,17 +104,16 @@ The package script includes only runtime extension files.
 
 ```text
 extension/                         Chrome MV3 extension
-src/                               Local Vite/React workspace
 scripts/                           Packaging and smoke-test scripts
 brand/store/werbl-screenshot-main-1280x800.png
-                                   Public README screenshot
-docs/privacy-policy.md             Public privacy policy source
+                                   Screenshot used in this README
+docs/privacy-policy.md             Privacy policy source
 ```
 
 ## Security
 
-Please do not report security issues in public GitHub issues. See
-[SECURITY.md](SECURITY.md) for private reporting instructions.
+Please do not post security issues publicly. See [SECURITY.md](SECURITY.md) for
+reporting details.
 
 ## License
 

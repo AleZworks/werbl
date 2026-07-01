@@ -1,31 +1,26 @@
 # Support
 
-## Bugs
+The fastest way to help fix a Werbl bug is to make it reproducible.
 
-Report reproducible Werbl bugs by opening a GitHub issue or emailing:
+You can open a GitHub issue or email:
 
 ```text
 Bugs4Werbl@gmail.com
 ```
 
-Useful bug reports include:
+Please include:
 
 - Werbl version.
 - Chrome version.
 - Operating system.
+- Whether you were using right-click conversion, the popup, or the dedicated
+  window.
 - Source site or input file type.
 - Target output format.
 - Steps to reproduce.
-- What happened instead of the expected result.
+- What you expected.
+- What happened instead.
 
-## Custom Workflow Inquiries
-
-For custom software or workflow automation inquiries, email:
-
-```text
-alezworks.dev@gmail.com
-```
-
-Please include the workflow, file types, target platforms, expected timeline, and
-whether the project must be completed without outside vendors or outsourced
-services.
+Some failures are caused by websites blocking browser image access. Those are
+still useful reports, but they may not always be fixable inside a Chrome
+extension.

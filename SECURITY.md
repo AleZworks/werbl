@@ -1,38 +1,38 @@
-# Security Policy
+# Security
 
-## Reporting A Vulnerability
+Please do not post security or privacy-sensitive reports in public GitHub
+issues.
 
-Please do not report security vulnerabilities in public GitHub issues.
-
-Email security and privacy-sensitive reports to:
+Email:
 
 ```text
 Bugs4Werbl@gmail.com
 ```
 
-Include:
+Useful reports include:
 
 - Werbl version.
 - Chrome version.
 - Operating system.
 - Steps to reproduce.
-- Any proof-of-concept files or URLs needed to reproduce the issue.
-- Whether the issue exposes user image data, selected files, browser URLs, or
-  local extension storage.
+- Whether the issue exposes image data, selected files, browser URLs, or local
+  extension storage.
+- Any small proof-of-concept file or public test URL needed to reproduce the
+  issue.
 
-I will prioritize reports that include clear reproduction steps and a concrete
-impact.
+Please do not send private images or account credentials in the first report.
+If a sensitive file is needed to reproduce the issue, say that in the email and
+we can agree on the safest next step.
 
 ## Scope
 
 In scope:
 
-- The Chrome extension in `extension/`.
-- The local web workspace in `src/`.
-- Packaging and release scripts in `scripts/`.
+- Chrome extension files in `extension/`.
+- Packaging and test scripts in `scripts/`.
 
 Out of scope:
 
 - Bugs in Chrome itself.
-- Issues caused by a website intentionally blocking browser image access.
-- Social engineering or attacks that require unrelated account compromise.
+- Websites intentionally blocking image access.
+- Social engineering or unrelated account compromise.

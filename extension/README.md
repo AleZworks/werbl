@@ -1,6 +1,6 @@
 # Werbl Extension
 
-This folder contains the runtime Chrome Manifest V3 extension.
+This folder is the Chrome Manifest V3 extension that gets packaged for release.
 
 ## Manual Install
 
@@ -9,20 +9,17 @@ This folder contains the runtime Chrome Manifest V3 extension.
 3. Click **Load unpacked**.
 4. Select this `extension` folder.
 
-## What It Does
+## What To Review
 
-- Adds right-click image conversion commands for PNG, JPG, and WebP.
-- Opens a popup batch converter for local image files.
-- Converts local batches into one ZIP.
-- Uses an offscreen document for local browser canvas conversion.
-- Uses a rendered-page fallback for some already-loaded `blob:` and `data:`
-  images when direct extension fetching fails.
+- `manifest.json` lists the Chrome permissions.
+- `background.js` owns the right-click conversion flow.
+- `offscreen.js` performs direct image conversion with browser APIs.
+- `popup.html`, `popup.css`, and `popup.js` power the batch converter.
 
-## Known Limits
+The extension does not include remote scripts or a backend endpoint. Downloads go
+through Chrome's downloads API.
 
-- Some sites use protected, expiring, or script-generated image URLs that may not
-  be fetchable by the extension.
-- The rendered-page fallback cannot convert images that taint canvas security.
-- Right-click output is intentionally limited to PNG, JPG, and WebP.
-- Closing the popup during conversion cancels the popup task. Use the dedicated
-  extension window for longer batches.
+## Limits
+
+Browser image access is not universal. Some sites use protected or expiring URLs,
+and some images cannot be drawn to canvas because of browser security rules.
